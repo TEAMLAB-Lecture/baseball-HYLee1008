@@ -132,7 +132,7 @@ def is_validated_number(user_input_number):
     result = False
     if is_digit(user_input_number):
         if is_between_100_and_999(user_input_number):
-            if is_duplicated_number(user_input_number):
+            if not is_duplicated_number(user_input_number):
                 result = True
     # ==================================
     return result
@@ -278,7 +278,7 @@ def is_no(one_more_input):
     # 조건에 따라 변환되어야 할 결과를 result 변수에 할당
 
     result = None
-    if one_more_input.lower() in ['n', 'no', '0']:
+    if one_more_input.lower() in ['n', 'no']:
         result = True
     else:
         result = False
@@ -301,7 +301,7 @@ def main():
 
             # 올바르지 않은 숫자가 입력될 다시 loop
             if not is_validated_number(user_input):
-                print('Wrong input, Input again')
+                print('Wrong Input, Input again')
                 continue
 
             # 올바른 숫자의 strike, ball을 출력
@@ -309,7 +309,7 @@ def main():
             print(f'Strikes : {strike} , Balls : {ball}')
 
         # 다시 시작할지 선택, 잘못된 입력은 다시 loop
-        user_choice = user_choice = input("You win, one more(Y/N)?")
+        user_choice = input("You win, one more(Y/N)?")
         while True:
             # yes면 다시 시작
             if is_yes(user_choice):
@@ -319,11 +319,11 @@ def main():
                 print("Random Number is : ", random_number)
                 break
             # no면 끝냄
-            elif is_no(user_choice):
+            elif is_no(user_choice) or user_choice == '0':
                 break
             # 올바르지 않은 입력은 다시 loop
             else:
-                print('Wrong input, Input again')
+                print('Wrong Input, Input again')
                 user_choice = input("You win, one more(Y/N)?")
         if not again:
             break
