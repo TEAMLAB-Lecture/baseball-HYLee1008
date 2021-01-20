@@ -293,11 +293,18 @@ def main():
     print("Random Number is : ", random_number)
     # ===Modify codes below=============
     # 위의 코드를 포함하여 자유로운 수정이 가능함
-    while True:
+    again = True
+    while again:
         again = False
+        zero = False
         while user_input != random_number:
             # 사용자로부터 숫자 입력
             user_input = input('Input guess number : ')
+
+            # 0이 들어오면 loop 탈출
+            if user_input == '0':
+                zero = True
+                break
 
             # 올바르지 않은 숫자가 입력될 다시 loop
             if not is_validated_number(user_input):
@@ -307,6 +314,10 @@ def main():
             # 올바른 숫자의 strike, ball을 출력
             strike, ball = get_strikes_or_ball(user_input, random_number)
             print(f'Strikes : {strike} , Balls : {ball}')
+
+        # 0이였으면 종료
+        if zero:
+            break
 
         # 다시 시작할지 선택, 잘못된 입력은 다시 loop
         user_choice = input("You win, one more(Y/N)?")
@@ -325,8 +336,6 @@ def main():
             else:
                 print('Wrong Input, Input again')
                 user_choice = input("You win, one more(Y/N)?")
-        if not again:
-            break
     # ==================================
     print("Thank you for using this program")
     print("End of the Game")
